@@ -1,14 +1,24 @@
 #!/usr/bin/env node
 
 const path = require("path");
-const chalk = require("chalk");
-const figlet = require("figlet");
-const commander = require("commander");
-const inquirer = require("inquirer");
+const fs = require("fs");
+const readline = require("readline");
 const { logger, LogLevel } = require("../lib/utils/logger");
 const ProjectDetector = require("../lib/core/project-detector");
 const TaskRunner = require("../lib/core/task-runner");
 const { formatHeading } = require("../lib/utils/formatters");
+
+// ANSI color codes for terminal output
+const Colors = {
+  RESET: '\x1b[0m',
+  BLUE: '\x1b[34m',
+  CYAN: '\x1b[36m',
+  GREEN: '\x1b[32m',
+  MAGENTA: '\x1b[35m',
+  RED: '\x1b[31m',
+  YELLOW: '\x1b[33m',
+  BOLD: '\x1b[1m',
+};
 
 // Task registry - would be imported in real code
 const commonTasks = {
@@ -33,17 +43,22 @@ const javaTasks = {
   optimizeDeps: require("../lib/tasks/java/optimize-deps")
 };
 
+// Create readline interface for user input
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
 // Display ASCII art logo
 function displayLogo() {
-  console.log(
-    chalk.magenta(
-      figlet.textSync("AIGuardian", {
-        font: "Standard",
-        horizontalLayout: "default"
-      })
-    )
-  );
-  console.log(chalk.magenta("Your AI-powered codebase optimizer and cleaner"));
+  console.log(`${Colors.MAGENTA}${Colors.BOLD}
+    _    ___ ____                     _ _             
+   / \\  |_ _/ ___|_   _  __ _ _ __ __| (_) __ _ _ __  
+  / _ \\  | | |  _| | | |/ _\` | '__/ _\` | |/ _\` | '_ \\ 
+ / ___ \\ | | |_| | |_| | (_| | | | (_| | | (_| | | | |
+/_/   \\_\\___\\____|\\__,_|\\__,_|_|  \\__,_|_|\\__,_|_| |_|
+${Colors.RESET}`);
+  console.log(`${Colors.MAGENTA}Your AI-powered codebase optimizer and cleaner${Colors.RESET}`);
   console.log("");
 }
 
@@ -60,191 +75,260 @@ function getTasksForProjectType(projectType) {
       { 
         id: "lineEndings", 
         name: "Normalize Line Endings",
-        description: "Ensures consistent line endings across files",
+        description: "Converts line endings to LF or CRLF",
         taskFn: commonTasks.lineEndings
       },
       { 
         id: "tempFiles", 
         name: "Clean Temporary Files",
-        description: "Removes temporary and backup files",
+        description: "Removes temporary and cache files",
         taskFn: commonTasks.tempFiles
       },
-      {
-        id: "formatCode",
+      { 
+        id: "formatCode", 
         name: "Format Code",
-        description: "Standardizes code formatting",
+        description: "Formats code according to best practices",
         taskFn: commonTasks.formatCode
       }
     ],
     javascript: [
       { 
-        id: "convertToTs", 
+        id: "js-convertToTs", 
         name: "Convert to TypeScript",
-        description: "Helps migrate JavaScript project to TypeScript",
+        description: "Converts JavaScript files to TypeScript",
         taskFn: javascriptTasks.convertToTs
       },
       { 
-        id: "optimizeDeps", 
+        id: "js-optimizeDeps", 
         name: "Optimize Dependencies",
-        description: "Updates and optimizes npm dependencies",
+        description: "Analyzes and optimizes npm dependencies",
         taskFn: javascriptTasks.optimizeDeps
       }
     ],
     python: [
       { 
-        id: "cleanupPycache", 
+        id: "py-cleanupPycache", 
         name: "Clean __pycache__",
-        description: "Removes Python cache files",
+        description: "Removes Python cache directories",
         taskFn: pythonTasks.cleanupPycache
       },
       { 
-        id: "optimizeRequirements", 
-        name: "Optimize Requirements",
-        description: "Updates and optimizes Python dependencies",
+        id: "py-optimizeRequirements", 
+        name: "Optimize requirements.txt",
+        description: "Analyzes and optimizes Python dependencies",
         taskFn: pythonTasks.optimizeRequirements
       }
     ],
     java: [
       { 
-        id: "cleanupBuild", 
+        id: "java-cleanupBuild", 
         name: "Clean Build Artifacts",
-        description: "Removes build artifacts and temporary files",
+        description: "Removes Java build directories",
         taskFn: javaTasks.cleanupBuild
       },
       { 
-        id: "optimizeDeps", 
+        id: "java-optimizeDeps", 
         name: "Optimize Dependencies",
-        description: "Updates and optimizes Maven/Gradle dependencies",
+        description: "Analyzes and optimizes Java dependencies",
         taskFn: javaTasks.optimizeDeps
       }
     ]
   };
   
-  let availableTasks = [...tasks.common];
+  const availableTasks = [...tasks.common];
   
-  if (projectType === "javascript" || projectType === "typescript") {
-    availableTasks = [...availableTasks, ...tasks.javascript];
-  } else if (projectType === "python") {
-    availableTasks = [...availableTasks, ...tasks.python];
-  } else if (projectType === "java") {
-    availableTasks = [...availableTasks, ...tasks.java];
+  if (projectType.includes("javascript") || projectType.includes("typescript")) {
+    availableTasks.push(...tasks.javascript);
+  }
+  
+  if (projectType.includes("python")) {
+    availableTasks.push(...tasks.python);
+  }
+  
+  if (projectType.includes("java")) {
+    availableTasks.push(...tasks.java);
   }
   
   return availableTasks;
 }
 
-// Main function
-async function main() {
-  // Set up command line options
-  const program = new commander.Command();
-  
-  program
-    .name("aiguardian")
-    .description("AI-powered codebase optimizer and cleaner")
-    .version("1.0.0")
-    .option("-p, --path <path>", "Path to project directory", process.cwd())
-    .option("-d, --dry-run", "Run without making changes", false)
-    .option("-v, --verbose", "Show detailed logs", false)
-    .option("-b, --no-backup", "Skip backup creation", false)
-    .option("-f, --force", "Run without user confirmation", false)
-    .parse(process.argv);
-  
-  const options = program.opts();
-  
-  // Set up logger based on verbosity
-  if (options.verbose) {
-    logger.setLevel(LogLevel.DEBUG);
-  }
-  
-  // Display logo
-  displayLogo();
-  
-  const projectPath = path.resolve(options.path);
-  logger.info(`Analyzing project at: ${chalk.cyan(projectPath)}`);
-  
-  // Detect project type
-  const detector = new ProjectDetector();
-  const projectInfo = await detector.detectProject(projectPath);
-  
-  if (projectInfo.type === "unknown" || projectInfo.error) {
-    logger.error(`Could not detect project type: ${projectInfo.error || "Unknown error"}`);
-    process.exit(1);
-  }
-  
-  logger.info(`Project type: ${chalk.cyan(projectInfo.type)}`);
-  
-  // Get available tasks for this project type
-  const availableTasks = getTasksForProjectType(projectInfo.type);
-  
-  // Prompt user to select tasks
-  const { selectedTaskIds } = await inquirer.prompt([
-    {
-      type: "checkbox",
-      name: "selectedTaskIds",
-      message: "Select optimization tasks to run:",
-      choices: availableTasks.map(task => ({
-        name: `${task.name} - ${task.description}`,
-        value: task.id,
-        checked: false
-      }))
-    }
-  ]);
-  
-  if (selectedTaskIds.length === 0) {
-    logger.warn("No tasks selected, exiting.");
-    process.exit(0);
-  }
-  
-  // Filter tasks by selection
-  const selectedTasks = availableTasks.filter(task => 
-    selectedTaskIds.includes(task.id)
-  );
-  
-  logger.info(`Selected ${selectedTasks.length} tasks to run.`);
-  
-  // Confirm if not in force mode
-  if (!options.force && !options.dryRun) {
-    const { confirm } = await inquirer.prompt([
-      {
-        type: "confirm",
-        name: "confirm",
-        message: "Run selected tasks? This will modify your project files.",
-        default: false
-      }
-    ]);
+// Parse command line arguments
+function parseArgs() {
+  const args = process.argv.slice(2);
+  const options = {
+    path: process.cwd(),
+    dryRun: false,
+    verbose: false,
+    backup: true,
+    force: false
+  };
+
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
     
-    if (!confirm) {
-      logger.info("Operation cancelled by user.");
+    if (arg === '-p' || arg === '--path') {
+      options.path = args[++i] || options.path;
+    } else if (arg === '-d' || arg === '--dry-run') {
+      options.dryRun = true;
+    } else if (arg === '-v' || arg === '--verbose') {
+      options.verbose = true;
+    } else if (arg === '-b' || arg === '--no-backup') {
+      options.backup = false;
+    } else if (arg === '-f' || arg === '--force') {
+      options.force = true;
+    } else if (arg === '-h' || arg === '--help') {
+      displayHelp();
+      process.exit(0);
+    } else if (arg === '--version') {
+      console.log('1.0.0');
       process.exit(0);
     }
   }
   
-  // Show what's going to happen
-  console.log(formatHeading("Tasks to Run"));
-  selectedTasks.forEach((task, index) => {
-    console.log(`${index + 1}. ${chalk.magenta(task.name)}`);
-    console.log(`   ${task.description}`);
+  return options;
+}
+
+// Display help information
+function displayHelp() {
+  console.log(`
+  Usage: aiguardian [options]
+  
+  Options:
+    -p, --path <path>     Path to project directory (default: current directory)
+    -d, --dry-run         Run without making changes
+    -v, --verbose         Show detailed logs
+    -b, --no-backup       Skip backup creation
+    -f, --force           Run without user confirmation
+    -h, --help            Display this help information
+    --version             Display version information
+  `);
+}
+
+// Prompt user to select tasks
+async function promptTaskSelection(availableTasks) {
+  return new Promise((resolve) => {
+    console.log(`${Colors.CYAN}Select optimization tasks to run:${Colors.RESET}`);
+    console.log(`(Enter the numbers of the tasks you want to run, separated by spaces, then press Enter)`);
+    console.log("");
+    
+    availableTasks.forEach((task, index) => {
+      console.log(`  ${index + 1}. ${Colors.BOLD}${task.name}${Colors.RESET} - ${task.description}`);
+    });
+    
+    rl.question(`\n${Colors.CYAN}Enter task numbers:${Colors.RESET} `, (answer) => {
+      const selectedIndices = answer.split(" ")
+        .map(num => parseInt(num.trim(), 10) - 1)
+        .filter(index => !isNaN(index) && index >= 0 && index < availableTasks.length);
+      
+      const selectedTaskIds = selectedIndices.map(index => availableTasks[index].id);
+      resolve(selectedTaskIds);
+    });
   });
-  console.log("");
-  
-  if (options.dryRun) {
-    logger.info(chalk.yellow("Running in dry-run mode (no changes will be made)"));
-  }
-  
-  // Run tasks
-  const taskRunner = new TaskRunner(projectPath, projectInfo, {
-    dryRun: options.dryRun,
-    verbose: options.verbose,
-    createBackup: options.backup
+}
+
+// Prompt for confirmation
+async function promptConfirmation(message) {
+  return new Promise((resolve) => {
+    rl.question(`${Colors.YELLOW}${message} (y/n)${Colors.RESET} `, (answer) => {
+      resolve(answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes');
+    });
   });
-  
-  const results = await taskRunner.runTasks(selectedTasks);
-  
-  // Show final message
-  if (results.success) {
-    logger.success(chalk.green.bold("All tasks completed successfully!"));
-  } else {
-    logger.error(chalk.red.bold(`Completed with errors: ${results.tasksFailed} tasks failed`));
+}
+
+// Main function
+async function main() {
+  try {
+    // Parse command line arguments
+    const options = parseArgs();
+    
+    // Set up logger based on verbosity
+    if (options.verbose) {
+      logger.setLevel(LogLevel.DEBUG);
+    }
+    
+    // Display logo
+    displayLogo();
+    
+    const projectPath = path.resolve(options.path);
+    logger.info(`Analyzing project at: ${Colors.CYAN}${projectPath}${Colors.RESET}`);
+    
+    // Detect project type
+    const detector = new ProjectDetector();
+    const projectType = await detector.detectProjectType(projectPath);
+    
+    logger.info(`Detected project type: ${Colors.CYAN}${projectType.join(", ")}${Colors.RESET}`);
+    
+    // Get available tasks for project type
+    const availableTasks = getTasksForProjectType(projectType);
+    
+    // Display task selection
+    console.log(formatHeading("Available Tasks"));
+    
+    // Prompt user to select tasks
+    const selectedTaskIds = await promptTaskSelection(availableTasks);
+    
+    if (selectedTaskIds.length === 0) {
+      logger.warn("No tasks selected, exiting.");
+      rl.close();
+      process.exit(0);
+    }
+    
+    // Filter tasks by selection
+    const selectedTasks = availableTasks.filter(task => 
+      selectedTaskIds.includes(task.id)
+    );
+    
+    logger.info(`Selected ${selectedTasks.length} tasks to run.`);
+    
+    // Confirm if not in force mode
+    if (!options.force && !options.dryRun) {
+      const confirm = await promptConfirmation("Run selected tasks? This will modify your project files.");
+      
+      if (!confirm) {
+        logger.info("Operation cancelled by user.");
+        rl.close();
+        process.exit(0);
+      }
+    }
+    
+    // Create task runner
+    const taskRunner = new TaskRunner({
+      projectPath,
+      dryRun: options.dryRun,
+      createBackup: options.backup
+    });
+    
+    // Run selected tasks
+    console.log(formatHeading("Running Tasks"));
+    
+    const results = await taskRunner.runTasks(
+      selectedTasks.map(task => task.taskFn)
+    );
+    
+    // Display results
+    console.log(formatHeading("Results"));
+    
+    for (const [index, result] of results.entries()) {
+      const task = selectedTasks[index];
+      const statusColor = result.success ? Colors.GREEN : Colors.RED;
+      const statusSymbol = result.success ? "✓" : "✖";
+      
+      console.log(`${statusColor}${statusSymbol}${Colors.RESET} ${Colors.BOLD}${task.name}${Colors.RESET}: ${result.message}`);
+    }
+    
+    const successCount = results.filter(r => r.success).length;
+    logger.info(`Completed ${successCount}/${results.length} tasks successfully.`);
+    
+    if (options.dryRun) {
+      logger.info(`Dry run completed. No changes were made.`);
+    }
+    
+    rl.close();
+  } catch (error) {
+    logger.error(`Error: ${error.message}`);
+    logger.debug(error.stack);
+    rl.close();
+    process.exit(1);
   }
 }
 
@@ -252,16 +336,6 @@ async function main() {
 main().catch(error => {
   logger.error(`Unhandled error: ${error.message}`);
   logger.debug(error.stack);
+  rl.close();
   process.exit(1);
 });
-
-
-
-
-
-
-
-
-
-
-
