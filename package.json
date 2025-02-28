@@ -1,0 +1,7 @@
+{
+  "name": "aiguardian",
+  "bin": {
+    "aiguardian": "./bin/aiguardian.js",
+    "aiguardian-all": "./bin/aiguardian-all.js"
+  }
+}

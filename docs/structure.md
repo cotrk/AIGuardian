@@ -1,0 +1,48 @@
+|-- package.json
+|-- README.md.md
+|-- bin
+  |-- aiguardian-all.js
+  |-- aiguardian.js
+|-- docs
+  |-- faq.md
+  |-- setup.md
+  |-- structure.md
+  |-- troubleshooting.md
+|-- assets
+  |-- logo-aiguardian-1.png
+  |-- logo-aiguardian-2.png
+  |-- logo-aiguardian-3.png
+  |-- logo-aiguardian-4.png
+  |-- logo-aiguardian-5.png
+  |-- png
+    |-- logo-aiguardian-1.png
+    |-- logo-aiguardian-2.png
+    |-- logo-aiguardian-3.png
+    |-- logo-aiguardian-4.png
+    |-- logo-aiguardian-5.png
+|-- tests
+  |-- integration
+  |-- unit
+|-- lib
+  |-- core
+    |-- backup-manager.js
+    |-- project-detector.js
+    |-- task-runner.js
+  |-- utils
+    |-- file-ops.js
+    |-- formatters.js
+    |-- logger.js
+  |-- tasks
+    |-- common
+      |-- gitignore.js
+      |-- line-endings.js
+      |-- temp-files.js
+    |-- javascript
+      |-- convert-to-ts.js
+      |-- optimize-deps.js
+    |-- java
+      |-- cleanup-build.js
+      |-- optimize-deps.js
+    |-- python
+      |-- cleanup-pycache.js
+      |-- optimize-requirements.js
