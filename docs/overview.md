@@ -1,4 +1,4 @@
-# AIGuardian Project Overview
+# AIGuardian Project Overview (v1.1.0)
 
 AIGuardian is an AI-powered codebase optimizer and cleaner tool designed to help developers maintain clean, secure, and efficient codebases. The tool is built with Node.js and is intended to be used as a command-line utility.
 
@@ -18,8 +18,10 @@ AIGuardian is an AI-powered codebase optimizer and cleaner tool designed to help
 
 3. **Task-Based Architecture**:
    - Tasks are organized by project type (common, JavaScript, Python, Java)
+   - Enhanced task registry with improved project type handling
    - Each task is implemented as a standalone module with a consistent interface
    - Tasks can be run individually or as part of a complete optimization suite
+   - Flexible task retrieval by project type or task ID
 
 ## Key Features
 
@@ -57,14 +59,14 @@ AIGuardian is an AI-powered codebase optimizer and cleaner tool designed to help
 ## Implementation Details
 
 1. **Command-Line Interface**:
-   - Uses `commander` for command-line argument parsing
-   - Uses `inquirer` for interactive prompts
-   - Uses `chalk` and `figures` for colorful terminal output
+   - Uses native Node.js modules for command-line argument parsing
+   - Uses native readline module for interactive prompts
+   - Uses `chalk` for colorful terminal output
 
 2. **File Operations**:
    - Safe file reading/writing with error handling
    - Directory creation and management
-   - File pattern matching with glob
+   - File pattern matching with native Node.js capabilities
 
 3. **Logging and Reporting**:
    - Custom logger implementation with different log levels

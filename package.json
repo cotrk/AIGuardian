@@ -1,17 +1,33 @@
 {
   "name": "aiguardian",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "AI-powered codebase optimizer and cleaner for developers of all skill levels",
+  "main": "index.js",
   "bin": {
-    "aiguardian": "./bin/aiguardian.js",
-    "aiguardian-all": "./bin/aiguardian-all.js"
+    "aiguardian": "./bin/aiguardian.js"
   },
   "scripts": {
-    "start": "node ./bin/aiguardian.js"
+    "start": "node ./bin/aiguardian.js",
+    "test": "node tests/task-registry.test.js && node tests/file-ops.test.js",
+    "lint": "echo \"No linting configured yet\" && exit 0",
+    "release": "node scripts/create-release.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2"
   },
   "engines": {
     "node": ">=14.0.0"
   },
+  "keywords": [
+    "ai",
+    "codebase",
+    "optimization",
+    "cleaning",
+    "javascript",
+    "typescript",
+    "python",
+    "java"
+  ],
   "author": "",
   "license": "MIT"
 }

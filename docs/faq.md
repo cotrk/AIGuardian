@@ -1,4 +1,4 @@
-# AIGuardian FAQ
+# AIGuardian FAQ (v1.1.0)
 
 ## Common Questions
 
@@ -39,3 +39,27 @@ If you don't like a change, you can restore from the backup that AIGuardian crea
 
 ### Do I need to be online to use AIGuardian?
 No, once AIGuardian is installed, it works completely offline.
+
+## About Version 1.1.0
+
+### What's new in version 1.1.0?
+Version 1.1.0 includes several improvements:
+- Task Registry Improvements: Better handling of project types and task registration
+- Test Suite Enhancements: Comprehensive test coverage for core functionality
+- Dependency Optimization: Removed unused dependencies for a leaner package
+- Command Line Options: Added new options like --yes, --task, and --all for more flexibility
+
+### Does AIGuardian have external dependencies?
+AIGuardian is designed to be lightweight and only uses native Node.js modules with the exception of 'chalk' for colorful terminal output.
+
+### How do I run a specific task?
+You can run a specific task using the --task option:
+```
+aiguardian --task clean-gitignore
+```
+
+### How do I run all tasks without confirmation?
+You can run all tasks without confirmation using:
+```
+aiguardian --all --yes
+```

@@ -26,3 +26,52 @@ yarn-error.log*
 .vscode/
 *.swp
 *.swo
+
+# AIGuardian generated .gitignore
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor directories and files
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+logs
+
+# AIGuardian backups
+.aiguardian/
+
+# Release files
+releases/
+
+# JavaScript/TypeScript
+dist/
+build/
+coverage/
+
+# AIGuardian generated .gitignore
+
+# System files
+
+# Editor directories and files
+
+# Logs
+
+# AIGuardian backups
+
+# JavaScript/TypeScript
+
+# AIGuardian generated .gitignore
+
+# System files
+
+# Editor directories and files
+
+# Logs
+
+# AIGuardian backups
+
+# JavaScript/TypeScript

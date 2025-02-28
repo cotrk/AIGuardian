@@ -1,4 +1,4 @@
-# Getting Started with AIGuardian
+# Getting Started with AIGuardian (v1.1.0)
 
 This guide will walk you through setting up and using AIGuardian in the simplest way possible.
 
@@ -70,8 +70,9 @@ This will show what changes would be made without actually changing anything.
 
 If you encounter any issues or have questions:
 
-1. Check the [GitHub repository](https://github.com/your-repo/aiguardian) for updates
-2. Open an issue on GitHub if you find a bug
-3. Ask for help in the discussions section
+1. Check the official AIGuardian documentation
+2. Visit the GitHub repository to search for similar issues
+3. Ask for help in the discussions section on GitHub
+4. Submit a bug report if you've found a new issue
 
 Remember, AIGuardian is designed to help make your coding experience easier!

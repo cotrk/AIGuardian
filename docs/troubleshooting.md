@@ -1,4 +1,4 @@
-# AIGuardian Troubleshooting Guide
+# AIGuardian Troubleshooting Guide (v1.1.0)
 
 If you run into any issues with AIGuardian, this guide will help you solve common problems.
 
@@ -50,6 +50,14 @@ If AIGuardian seems to take a long time:
    ```
    aiguardian --verbose
    ```
+3. Try running specific tasks with the `--task` option:
+   ```
+   aiguardian --task clean-gitignore
+   ```
+4. Use the `--yes` option to skip confirmation prompts:
+   ```
+   aiguardian --yes
+   ```
 
 ### Changes made by AIGuardian broke my project
 
@@ -76,6 +84,32 @@ If you see permission errors:
 
 1. Make sure you have write permission to the files in your project
 2. Try running AIGuardian with administrator privileges
+
+## Command Line Options
+
+If you're having trouble with command line options, here's a quick reference:
+
+```
+Options:
+  -p, --path <path>   Path to project directory (default: current directory)
+  -d, --dry-run       Run without making changes
+  -v, --verbose       Show detailed logs
+  -y, --yes           Skip confirmation prompts
+  -t, --task <id>     Run specific task (can be used multiple times)
+  -a, --all           Run all available tasks
+  --no-backup         Skip backup creation
+  -h, --help          Display help information
+```
+
+For example, to run all tasks without confirmation:
+```
+aiguardian --all --yes
+```
+
+Or to run a specific task in dry-run mode:
+```
+aiguardian --task clean-gitignore --dry-run
+```
 
 ## Getting More Help
 

@@ -1,126 +1,105 @@
-# AIGuardian 🛡️
+# AIGuardian
 
-`Latest Updates (v1.0.0)`
+`Release (v1.1.0)`
 
-- **Complete Rebrand**: Evolved from a simple cleaner to a comprehensive AI-powered optimization tool
-- **Universal Architecture**: Now automatically detects project types and offers relevant optimization tasks
-- **Task-Based Framework**: Redesigned with a modular architecture that makes adding new optimizations easy
+- **Task Registry Improvements**: Fixed task registration and retrieval for better project type handling
+- **Test Suite Enhancements**: Comprehensive test coverage for core functionality
+- **Dependency Optimization**: Removed unused dependencies for a leaner package
+- **Bug Fixes**: Resolved method naming inconsistencies in core modules
 - **Cross-Platform Support**: Improved compatibility across Windows, Linux, and macOS
-- **Modern UI**: Enhanced command-line interface with progress indicators and colorful output
 
 <div align="center" style="border-top:15px #000 solid;border-bottom:15px #000 solid;margin:1.2rem;padding:1rem;opacity:0.5;">
   <img src="assets/logo-aiguardian-5.png" alt="AIGuardian Logo" max-width="99%">
 </div>
 
-<p>An AI-powered <strong>codebase optimizer and cleaner</strong> that intelligently detects project types and provides tailored optimization tasks.</p>
+<h2 align="center">AI-Powered Codebase Optimization Made Simple</h2>
 
-## Overview
+<p align="center">
+  <strong>Clean. Optimize. Secure.</strong><br>
+  <a href="https://aiguardian.dev">aiguardian.dev</a> (Coming Soon)
+</p>
 
-AIGuardian helps you maintain clean, secure, and efficient codebases by automatically detecting your project type (JavaScript/TypeScript, Python, Java, etc.) and offering relevant optimization tasks. It serves as an intelligent companion for your development process, ensuring your code remains organized and follows best practices.
+<p align="center">
+  <a href="#installation">Installation</a> •
+  <a href="#why-aiguardian">Why AIGuardian?</a> •
+  <a href="#key-benefits">Key Benefits</a> •
+  <a href="#supported-languages">Supported Languages</a> •
+  <a href="#documentation">Documentation</a>
+</p>
 
-## Features
+## Transform Your Codebase in Seconds
 
-- **Universal Detection**: Automatically identifies project types and adapts to different codebases
-- **Smart Optimization**: Provides tailored tasks for specific languages and frameworks
-- **Safety First**: Creates backups before making changes to ensure nothing is lost
-- **Flexible Execution**: Run individual tasks or complete optimization suites
-- **User-Friendly Interface**: Interactive CLI with visual progress indicators
-
-## Installation
+AIGuardian is the intelligent companion every developer needs. Whether you're a seasoned professional or just starting your coding journey, AIGuardian automatically detects your project type and applies tailored optimizations to keep your code clean, secure, and efficient.
 
 ```bash
-# Global installation (recommended)
+# Install globally with npm
 npm install -g aiguardian
 
-# Or local installation
-npm install --save-dev aiguardian
-```
-
-## Usage
-
-### Individual Task Mode
-
-Select and run specific optimization tasks:
-
-```bash
-# If installed globally
+# Run it on your project
 aiguardian
-
-# If installed locally
-npx aiguardian
 ```
-
-### Complete Optimization Mode
-
-Run all appropriate optimization tasks for your project type:
-
-```bash
-# If installed globally
-aiguardian-all
-
-# If installed locally
-npx aiguardian-all
-```
-
-### Command Line Options
-
-```
-Options:
-  -p, --path <path>   Path to project directory (default: current directory)
-  -d, --dry-run       Run without making changes
-  -v, --verbose       Show detailed logs
-  -b, --no-backup     Skip backup creation
-  -f, --force         Run without user confirmation
-  -h, --help          Display help information
-```
-
-## Optimization Capabilities
-
-AIGuardian offers various optimization tasks based on your project type:
-
-### Common Tasks (All Projects)
-
-- **Optimize .gitignore**: Create or improve .gitignore with appropriate patterns
-- **Normalize Line Endings**: Ensure consistent line endings across files (CRLF/LF)
-- **Clean Temporary Files**: Remove temporary, backup, and system files
-
-### JavaScript/TypeScript Tasks
-
-- **Convert to TypeScript**: Help migrate JavaScript projects to TypeScript
-- **Optimize Dependencies**: Update and clean npm dependencies
-
-### Python Tasks
-
-- **Clean**pycache\*\*\*\*: Remove Python cache files and directories
-- **Optimize Requirements**: Update and clean Python package dependencies
-
-### Java Tasks
-
-- **Clean Build Artifacts**: Remove build directories and compiled files
-- **Optimize Dependencies**: Update Maven/Gradle dependencies
 
 ## Why AIGuardian?
 
-Even experienced developers can miss opportunities for codebase optimization. AIGuardian automatically identifies these opportunities and helps implement improvements, ensuring your code stays clean, secure, and efficient.
+> "AIGuardian saved me hours of cleanup work on my AI-generated code. It's now part of my standard workflow." — _No Coder using AIGuardian with Cursor_
 
-## For Developers of All Levels
+- **Zero Configuration**: Just run it and let AIGuardian do the work
+- **AI-Powered Detection**: Automatically identifies your project type
+- **Safe Operations**: Creates backups before making any changes
+- **Lightweight**: Minimal dependencies, maximum performance
+- **Universal Support**: Works with JavaScript, TypeScript, Python, Java, and more
 
-AIGuardian is designed to be accessible for developers with varying levels of experience:
+## Key Benefits
 
-- No complex configuration files needed
-- Clear, plain language instructions
-- Visual feedback with colors and symbols
-- Confirmation prompts before making changes
-- Detailed summaries of actions taken
+### For No-Code & Low-Code Developers
 
-## Contributing
+- **Clean up AI-generated code** without understanding all the technical details
+- **Fix common issues** automatically without deep programming knowledge
+- **Learn best practices** by seeing what AIGuardian optimizes
 
-We welcome contributions! Feel free to:
+### For Professional Developers
 
-1. Report bugs and issues
-2. Suggest new features or optimizations
-3. Submit pull requests
-4. Help improve documentation
+- **Standardize codebases** across teams and projects
+- **Automate routine maintenance** tasks
+- **Enforce best practices** consistently
+- **Reduce technical debt** with regular optimization
+
+### For Everyone
+
+- **Improve security** by removing unnecessary files and dependencies
+- **Enhance performance** with optimized code and dependencies
+- **Maintain consistency** across your entire project
+
+## Supported Languages
+
+AIGuardian provides specialized optimizations for:
+
+- **JavaScript/TypeScript**: Dependency management, code conversion, and more
+- **Python**: Package optimization, cache cleaning, and code formatting
+- **Java**: Build artifact management and dependency optimization
+- **More languages coming soon!**
+
+## Quick Start
+
+```bash
+# Run interactively (recommended for first-time users)
+aiguardian
+
+# Run all optimizations without prompts
+aiguardian --all --yes
+
+# Preview changes without applying them
+aiguardian --dry-run
+```
+
+## Documentation
+
+Comprehensive documentation is available in the `docs` folder:
+
+- [Getting Started Guide](docs/setup.md)
+- [Frequently Asked Questions](docs/faq.md)
+- [Troubleshooting](docs/troubleshooting.md)
+- [Project Overview](docs/overview.md)
 
 ## License
 
@@ -128,4 +107,7 @@ MIT License - Feel free to use AIGuardian in your projects!
 
 ---
 
-Note: AIGuardian is under active development. For the latest features and updates, check the GitHub repository regularly.
+<p align="center">
+  <strong>Made with ❤️ for developers of all skill levels</strong><br>
+  Star ⭐ this repo if you found it useful!
+</p>
