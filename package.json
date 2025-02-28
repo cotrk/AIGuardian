@@ -1,7 +1,17 @@
 {
   "name": "aiguardian",
+  "version": "1.0.0",
+  "description": "AI-powered codebase optimizer and cleaner for developers of all skill levels",
   "bin": {
     "aiguardian": "./bin/aiguardian.js",
     "aiguardian-all": "./bin/aiguardian-all.js"
-  }
+  },
+  "scripts": {
+    "start": "node ./bin/aiguardian.js"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "",
+  "license": "MIT"
 }
