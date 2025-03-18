@@ -7,6 +7,7 @@
 - **Dependency Optimization**: Removed unused dependencies for a leaner package
 - **Bug Fixes**: Resolved method naming inconsistencies in core modules
 - **Cross-Platform Support**: Improved compatibility across Windows, Linux, and macOS
+- **Intelligent Code Optimization**: Added features for duplicate code detection, dead code elimination, code formatting, complexity analysis, and performance optimization
 
 <div align="center" style="border-top:15px #000 solid;border-bottom:15px #000 solid;margin:1.2rem;padding:1rem;opacity:0.5;">
   <img src="assets/logo-aiguardian-5.png" alt="AIGuardian Logo" max-width="99%">
@@ -37,6 +38,9 @@ npm install -g aiguardian
 
 # Run it on your project
 aiguardian
+
+# Or use the specialized code optimization tool
+aiguardian-optimize
 ```
 
 ## Why AIGuardian?
@@ -48,6 +52,7 @@ aiguardian
 - **Safe Operations**: Creates backups before making any changes
 - **Lightweight**: Minimal dependencies, maximum performance
 - **Universal Support**: Works with JavaScript, TypeScript, Python, Java, and more
+- **Intelligent Optimization**: Detects and fixes code quality issues automatically
 
 ## Key Benefits
 
@@ -56,6 +61,7 @@ aiguardian
 - **Clean up AI-generated code** without understanding all the technical details
 - **Fix common issues** automatically without deep programming knowledge
 - **Learn best practices** by seeing what AIGuardian optimizes
+- **Improve code quality** with intelligent optimization suggestions
 
 ### For Professional Developers
 
@@ -63,20 +69,22 @@ aiguardian
 - **Automate routine maintenance** tasks
 - **Enforce best practices** consistently
 - **Reduce technical debt** with regular optimization
+- **Identify code duplication** and complexity issues
 
 ### For Everyone
 
 - **Improve security** by removing unnecessary files and dependencies
 - **Enhance performance** with optimized code and dependencies
 - **Maintain consistency** across your entire project
+- **Reduce code complexity** for better maintainability
 
 ## Supported Languages
 
 AIGuardian provides specialized optimizations for:
 
-- **JavaScript/TypeScript**: Dependency management, code conversion, and more
-- **Python**: Package optimization, cache cleaning, and code formatting
-- **Java**: Build artifact management and dependency optimization
+- **JavaScript/TypeScript**: Dependency management, code conversion, formatting, and optimization
+- **Python**: Package optimization, cache cleaning, code formatting, and complexity analysis
+- **Java**: Build artifact management, dependency optimization, and code quality improvements
 - **More languages coming soon!**
 
 ## Quick Start
@@ -90,6 +98,12 @@ aiguardian --all --yes
 
 # Preview changes without applying them
 aiguardian --dry-run
+
+# Run code optimization tasks
+aiguardian-optimize
+
+# Run specific optimization tasks
+aiguardian-optimize -t detect-duplicate-code -t eliminate-dead-code
 ```
 
 ## Documentation
@@ -100,6 +114,7 @@ Comprehensive documentation is available in the `docs` folder:
 - [Frequently Asked Questions](docs/faq.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Project Overview](docs/overview.md)
+- [Code Optimization](docs/code-optimization.md)
 
 ## License
 
