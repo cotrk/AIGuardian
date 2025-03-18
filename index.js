@@ -9,6 +9,7 @@ const ProjectDetector = require('./lib/core/project-detector');
 const TaskRunner = require('./lib/core/task-runner');
 const BackupManager = require('./lib/core/backup-manager');
 const taskRegistry = require('./lib/core/task-registry');
+const OptimizationManager = require('./lib/core/optimization-manager');
 const logger = require('./lib/utils/logger').logger;
 const fileOps = require('./lib/utils/file-ops');
 
@@ -66,6 +67,7 @@ module.exports = {
   TaskRunner,
   BackupManager,
   taskRegistry,
+  OptimizationManager,
   logger,
   fileOps
 };

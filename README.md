@@ -1,6 +1,6 @@
 # AIGuardian
 
-`Release (v1.1.0)`
+`Release (v1.2.0)`
 
 - **Task Registry Improvements**: Fixed task registration and retrieval for better project type handling
 - **Test Suite Enhancements**: Comprehensive test coverage for core functionality
@@ -8,6 +8,11 @@
 - **Bug Fixes**: Resolved method naming inconsistencies in core modules
 - **Cross-Platform Support**: Improved compatibility across Windows, Linux, and macOS
 - **Intelligent Code Optimization**: Added features for duplicate code detection, dead code elimination, code formatting, complexity analysis, and performance optimization
+- **Enhanced Duplicate Code Detection**: Improved metrics calculation and detailed refactoring suggestions
+- **Severity Assessment**: Added severity levels (LOW, MODERATE, HIGH) for duplicate code issues
+- **Improved Algorithms**: More accurate detection and enhanced reporting format
+- **Comprehensive Testing**: Added test suite for duplicate code detection
+- **Bug Fixes**: Fixed metrics calculation and report formatting issues
 
 <div align="center" style="border-top:15px #000 solid;border-bottom:15px #000 solid;margin:1.2rem;padding:1rem;opacity:0.5;">
   <img src="assets/logo-aiguardian-5.png" alt="AIGuardian Logo" max-width="99%">
