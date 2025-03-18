@@ -4,8 +4,8 @@
   "description": "AI-powered codebase optimizer and cleaner for developers of all skill levels",
   "main": "index.js",
   "bin": {
-    "aiguardian": "./bin/aiguardian.js",
-    "aiguardian-optimize": "./bin/aiguardian-optimize.js"
+    "aiguardian": "bin/aiguardian.js",
+    "aiguardian-optimize": "bin/aiguardian-optimize.js"
   },
   "scripts": {
     "start": "node ./bin/aiguardian.js",
