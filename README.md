@@ -2,36 +2,34 @@
 
 `Release (v1.2.0)`
 
-- **Task Registry Improvements**: Fixed task registration and retrieval for better project type handling
-- **Test Suite Enhancements**: Comprehensive test coverage for core functionality
-- **Dependency Optimization**: Removed unused dependencies for a leaner package
-- **Bug Fixes**: Resolved method naming inconsistencies in core modules
-- **Cross-Platform Support**: Improved compatibility across Windows, Linux, and macOS
-- **Intelligent Code Optimization**: Added features for duplicate code detection, dead code elimination, code formatting, complexity analysis, and performance optimization
+## Latest Improvements
+
 - **Enhanced Duplicate Code Detection**: Improved metrics calculation and detailed refactoring suggestions
 - **Severity Assessment**: Added severity levels (LOW, MODERATE, HIGH) for duplicate code issues
 - **Improved Algorithms**: More accurate detection and enhanced reporting format
 - **Comprehensive Testing**: Added test suite for duplicate code detection
 - **Bug Fixes**: Fixed metrics calculation and report formatting issues
 
-<div align="center" style="border-top:15px #000 solid;border-bottom:15px #000 solid;margin:1.2rem;padding:1rem;opacity:0.5;">
-  <img src="assets/logo-aiguardian-5.png" alt="AIGuardian Logo" max-width="99%">
-</div>
+## Previous Improvements
 
-<h2 align="center">AI-Powered Codebase Optimization Made Simple</h2>
+- **Task Registry Improvements**: Fixed task registration and retrieval for better project type handling
+- **Test Suite Enhancements**: Comprehensive test coverage for core functionality
+- **Dependency Optimization**: Removed unused dependencies for a leaner package
+- **Cross-Platform Support**: Improved compatibility across Windows, Linux, and macOS
+- **Intelligent Code Optimization**: Features for duplicate code detection, dead code elimination, code formatting, complexity analysis, and performance optimization
 
-<p align="center">
-  <strong>Clean. Optimize. Secure.</strong><br>
-  <a href="https://aiguardian.dev">aiguardian.dev</a> (Coming Soon)
-</p>
+![AIGuardian Logo](assets/logo-aiguardian-5.png)
 
-<p align="center">
-  <a href="#installation">Installation</a> •
-  <a href="#why-aiguardian">Why AIGuardian?</a> •
-  <a href="#key-benefits">Key Benefits</a> •
-  <a href="#supported-languages">Supported Languages</a> •
-  <a href="#documentation">Documentation</a>
-</p>
+## AI-Powered Codebase Optimization Made Simple
+
+**Clean. Optimize. Secure.**  
+[aiguardian.dev](https://aiguardian.dev) (Coming Soon)
+
+[Quick Start](#quick-start) •
+[Why AIGuardian?](#why-aiguardian) •
+[Key Benefits](#key-benefits) •
+[Supported Languages](#supported-languages) •
+[Documentation](#documentation)
 
 ## Transform Your Codebase in Seconds
 
@@ -127,7 +125,6 @@ MIT License - Feel free to use AIGuardian in your projects!
 
 ---
 
-<p align="center">
-  <strong>Made with ❤️ for developers of all skill levels</strong><br>
-  Star ⭐ this repo if you found it useful!
-</p>
+## Made with ❤️ for developers of all skill levels
+
+Star ⭐ this repo if you found it useful!
